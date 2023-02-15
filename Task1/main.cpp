@@ -13,18 +13,6 @@
 #include <vector>
 #include <algorithm>
 
-void Create_start_violations(std::vector<traffic_violation> &violations){
-    char flag;
-    while(std::cin>>flag){
-        if(flag == 'y'){
-            return;
-        }
-        traffic_violation violation;
-        violation.Add_traffic_violation();
-        violations.push_back(violation);
-    }
-}
-
 int main(){
     int operations;
     std::vector<traffic_violation> violations;
@@ -34,7 +22,7 @@ int main(){
         std::cin >> operations;
         switch (operations) {
             case 1: {
-                violation.Add_traffic_violation();
+                violation.Add_traffic_violation(1);
                 break;
             }
             case 2: {
@@ -57,7 +45,7 @@ int main(){
             }
             default: {
                 std::string article;
-                std::cin>>article;
+                std::cin >> article;
                 std::for_each(violations.begin(), violations.end(),
                               [&](traffic_violation violation) {
                                   if (violation.article == article) {
