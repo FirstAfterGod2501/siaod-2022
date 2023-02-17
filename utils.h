@@ -5,7 +5,6 @@
 #ifndef SIAOD_UTILS_H
 #define SIAOD_UTILS_H
 #define CIN_FLUSH if (std::cin.peek()) std::cin.ignore()
-#endif //SIAOD_UTILS_H
 
 #include <iostream>
 #include <vector>
@@ -35,3 +34,5 @@ namespace utils{
         });
     }
 }
+
+#endif //SIAOD_UTILS_H

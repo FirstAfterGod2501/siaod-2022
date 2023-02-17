@@ -1,7 +1,9 @@
 #include "traffic_violation.h"
+#include "static_array_test.h"
 #include <iostream>
 #include <vector>
 #include <algorithm>
+
 void create_start_vector(std::vector<traffic_violation> &violations){
     int offset = 0;
     for(int i =0;i<3;++i){
@@ -12,8 +14,11 @@ void create_start_vector(std::vector<traffic_violation> &violations){
     }
 }
 
-
-int main(){
+int main(int argc, char **argv){
+    if(argc>1){
+        test::test_static_array();
+        return 0;
+    }
     int operations;
     std::vector<traffic_violation> violations;
     traffic_violation violation;

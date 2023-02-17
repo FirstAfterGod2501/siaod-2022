@@ -10,12 +10,12 @@ Linux torvalds
 BMW M5 F92
 121412521
 vernadsokogo 76
-192.168
+12.5.1
 5000
 qwe113
 scarlxrd
 Nissan Silvia S15
 41251561
 vernadsokogo 76
-1.48.8
+12.5.1
 500212

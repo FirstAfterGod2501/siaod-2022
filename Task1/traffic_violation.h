@@ -4,14 +4,11 @@
 
 #ifndef SIAOD_TRAFFIC_VIOLATION_H
 #define SIAOD_TRAFFIC_VIOLATION_H
-#endif //SIAOD_TRAFFIC_VIOLATION_H
 
 #include <string>
-#include <chrono>
-#include <sstream>
 #include <iostream>
 #include <fstream>
-#include "utils.h"
+#include "../utils.h"
 
 struct traffic_violation{
     template<class Type>
@@ -60,8 +57,7 @@ struct traffic_violation{
         get_value(article);
         std::cout << "Enter punishment\n";
         std::cin >> punishment;
-        return;
-    }
+   }
 
     std::string Get_information_about_violation(){
         return "car number: " + car_number +
@@ -88,3 +84,5 @@ struct traffic_violation{
     int punishment;
 
 };
+
+#endif //SIAOD_TRAFFIC_VIOLATION_H
