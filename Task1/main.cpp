@@ -12,17 +12,28 @@
 #include <iostream>
 #include <vector>
 #include <algorithm>
+void create_start_vector(std::vector<traffic_violation> &violations){
+    int offset = 0;
+    for(int i =0;i<3;++i){
+        traffic_violation violation;
+        violation.read_data_from_file("../default.txt",offset);
+        violations.push_back(violation);
+        offset+=7;
+    }
+}
+
 
 int main(){
     int operations;
     std::vector<traffic_violation> violations;
     traffic_violation violation;
+    create_start_vector(violations);
     while(true) {
         std::cout<<"1.From keyvoard\n2.insertion\n3.delete from number\n4.output\n";
         std::cin >> operations;
         switch (operations) {
             case 1: {
-                violation.Add_traffic_violation(1);
+                violation.Add_traffic_violation();
                 break;
             }
             case 2: {
@@ -43,6 +54,13 @@ int main(){
                         }));
                 break;
             }
+            case 5:
+                std::for_each(violations.begin(), violations.end(),
+                              [&](traffic_violation violation) {
+                                  std::cout << violation.Get_information_about_violation() << "\n\n";
+                              }
+                );
+                break;
             default: {
                 std::string article;
                 std::cin >> article;

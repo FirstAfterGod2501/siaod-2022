@@ -20,16 +20,18 @@ struct traffic_violation{
                      [](const std::string& input){return input;});
     }
 
-    void read_data_from_file(){
-        std::string path = "../../default.txt";
+    void read_data_from_file(const std::string& path,int offset){
         std::string line;
         std::ifstream in(path);
         std::vector<std::string> temp_values;
+        int line_counter = 0;
         if (in.is_open())
         {
-            while (getline(in, line))
-            {
-                temp_values.push_back(line);
+            while (getline(in, line)) {
+                if (line_counter >= offset) {
+                    temp_values.push_back(line);
+                }
+                ++line_counter;
             }
         }
         in.close();
@@ -43,25 +45,22 @@ struct traffic_violation{
         punishment = std::stoi(temp_values[counter++]);
     }
 
-    void Add_traffic_violation(int mode) {
-        if (mode == 0) {
-            std::cout << "Enter car number\n";
-            std::cin >> car_number;
-            std::cout << "Enter full name\n";
-            get_value(full_name);
-            std::cout << "Enter model of car\n";
-            get_value(model);
-            std::cout << "Enter date of violation\n";
-            std::cin >> date_of_violation;
-            std::cout << "Enter place of violation\n";
-            get_value(place_of_violation);
-            std::cout << "Enter article\n";
-            get_value(article);
-            std::cout << "Enter punishment\n";
-            std::cin >> punishment;
-            return;
-        }
-        read_data_from_file();
+    void Add_traffic_violation() {
+        std::cout << "Enter car number\n";
+        std::cin >> car_number;
+        std::cout << "Enter full name\n";
+        get_value(full_name);
+        std::cout << "Enter model of car\n";
+        get_value(model);
+        std::cout << "Enter date of violation\n";
+        std::cin >> date_of_violation;
+        std::cout << "Enter place of violation\n";
+        get_value(place_of_violation);
+        std::cout << "Enter article\n";
+        get_value(article);
+        std::cout << "Enter punishment\n";
+        std::cin >> punishment;
+        return;
     }
 
     std::string Get_information_about_violation(){
@@ -69,7 +68,7 @@ struct traffic_violation{
                "\nfull name: " + full_name +
                "\nmodel: " + model +
                "\ndate of violation: " + asctime(gmtime(&date_of_violation))
-               +"\narticle: " + article+
+               +"article: " + article+
                +"\npunishment: " + std::to_string(punishment);
 
     }
