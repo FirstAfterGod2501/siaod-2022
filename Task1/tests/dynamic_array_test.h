@@ -1,13 +1,17 @@
 //
-// Created by first on 17.02.23.
+// Created by first on 18.02.2023.
 //
-#include "static_array.h"
-#include "traffic_violation.h"
+
+#ifndef SIAOD_DYNAMIC_ARRAY_TEST_H
+#define SIAOD_DYNAMIC_ARRAY_TEST_H
+
+#include "../dynamic_array.h"
+#include "../traffic_violation.h"
 #include <iostream>
 
 namespace test {
-    void test_static_array() {
-        auto *arr = new static_array(100);
+    void test_dynamic_array() {
+        auto *arr = new dynamic_array(100);
         auto *vi = new traffic_violation;
         vi->Add_traffic_violation();
         arr->append(*vi);
@@ -21,3 +25,5 @@ namespace test {
         delete (v2);
     }
 }
+
+#endif //SIAOD_DYNAMIC_ARRAY_TEST_H

@@ -5,58 +5,46 @@
 #include <algorithm>
 #include "traffic_violation.h"
 
-
+template<std::size_t Size>
 struct static_array {
-private:
-    int maxsize;
-    traffic_violation* ar;
-
-    void shift(traffic_violation *array, int i, int j)
-    {
-        while(i < j)
-        {
-            traffic_violation tmp = array[i];
-            array[i] = array[j];
-            array[j] = tmp;
-            i++;
-            j--;
-        }
-    }
-public:
     int size = 0;
+private:
+    int maxsize{};
+    std::array<traffic_violation,Size> array;
+public:
 
-    static_array(int max_size){
-        this->maxsize=max_size;
-        this->ar = new traffic_violation[max_size];
+    static_array(){
+        this->maxsize=Size;
     }
 
-    void append(traffic_violation element) {
+    void append(const traffic_violation& element) {
         if (size + 1 < maxsize) {
-            ++size;
-            ar[size] = std::move(element);
+            array[size] = element;
+            size++;
             return;
         }
         exit(139);
     }
 
-    void erase(int start,int end,traffic_violation element){
-        for (int i = start; i < end; ++i) {
-            shift(ar,i,end);
-        }
-    }
-
-    void print_array(std::ostream &out){
-        for (int i = 0; i < size; ++i) {
-            out<<ar[i].Get_information_about_violation()<<" ";
-        }
+    void print_array(std::ostream &out) {
+        std::for_each(array.begin(), array.end(),
+                      [&](traffic_violation violation) {
+                          if (!violation.car_number.empty()) {
+                              out << violation.Get_information_about_violation() << "\n";
+                          }
+                      });
     }
 
     traffic_violation read(traffic_violation violation){
         violation.Add_traffic_violation();
         return violation;
     }
-
-     ~static_array(){
-        delete(ar);
+    traffic_violation &operator[](std::int32_t index) const noexcept {
+        if (index >= 0 && index <= size) {
+            return *(static_array::array + index);
+        }
+        else {
+            throw std::length_error("Index is out of range.");
+        }
     }
 };
