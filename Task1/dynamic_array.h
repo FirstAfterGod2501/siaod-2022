@@ -32,22 +32,22 @@ public:
 
     int size = 0;
 
-    dynamic_array(int max_size){
-        this->maxsize=max_size;
+    dynamic_array(){
+        this->maxsize=0;
         this->ar = new traffic_violation[size+1];
     }
 
     void append(traffic_violation &element) {
-        if(size+1 > maxsize) {
+        if(size+1 >= maxsize) {
             auto *new_array = new traffic_violation[size+1];
-            std::memcpy(new_array, ar, size+1 * sizeof(traffic_violation));
+            std::memcpy(new_array, ar, (size) * sizeof(traffic_violation));
             delete[] ar;
+            new_array[size] = element;
             ar = new_array;
-            ar[size+1] = std::move(element);
             ++size;
             return;
         }
-        ar[size+1] = std::move(element);
+        ar[size+1] = element;
         ++size;
     }
 
