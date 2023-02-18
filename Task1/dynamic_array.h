@@ -12,7 +12,6 @@
 #include <algorithm>
 #include "traffic_violation.h"
 
-
 struct dynamic_array{
 private:
     int maxsize;
@@ -38,12 +37,18 @@ public:
         this->ar = new traffic_violation[size+1];
     }
 
-    void append(traffic_violation element) {
+    void append(traffic_violation &element) {
+        if(size+1 > maxsize) {
+            auto *new_array = new traffic_violation[size+1];
+            std::memcpy(new_array, ar, size+1 * sizeof(traffic_violation));
+            delete[] ar;
+            ar = new_array;
+            ar[size+1] = std::move(element);
+            ++size;
+            return;
+        }
+        ar[size+1] = std::move(element);
         ++size;
-        auto * new_array = new traffic_violation[size];
-        std::memcpy(new_array, ar, size-1 * sizeof(traffic_violation));
-        ar = new_array;
-        delete [] new_array;
     }
 
     void erase(int start,int end,traffic_violation element){

@@ -36,6 +36,7 @@ public:
         violation.Add_traffic_violation();
         return violation;
     }
+
     traffic_violation &operator[](std::int32_t index) const noexcept {
         if (index >= 0 && index <= size) {
             return *(static_array::array + index);
