@@ -8,13 +8,11 @@
 namespace test {
     void test_static_array() {
         static_array<100> arr;
-        traffic_violation violation;
-        traffic_violation violation_2;
+        traffic_violation violation,violation1;
         violation = arr.read(violation);
-        violation_2 = arr.read(violation_2);
+        violation1 = arr.read(violation1);
         arr.append(violation);
-        arr.append(violation_2);
-        arr.print_array(std::cout);
+        arr.append(violation1);
         arr.print_array(std::cout);
     }
 }

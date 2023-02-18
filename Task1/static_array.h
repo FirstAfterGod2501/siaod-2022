@@ -10,7 +10,7 @@ struct static_array {
     int size = 0;
 private:
     int maxsize{};
-    std::array<traffic_violation,Size> array;
+    traffic_violation array[Size];
 public:
 
     static_array(){
@@ -27,12 +27,9 @@ public:
     }
 
     void print_array(std::ostream &out) {
-        std::for_each(array.begin(), array.end(),
-                      [&](traffic_violation violation) {
-                          if (!violation.car_number.empty()) {
-                              out << violation.Get_information_about_violation() << "\n";
-                          }
-                      });
+        for (int i = 0; i < size; ++i) {
+            out << array[i].Get_information_about_violation() << "\n";
+        }
     }
 
     traffic_violation read(traffic_violation violation){

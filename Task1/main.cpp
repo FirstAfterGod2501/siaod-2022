@@ -1,5 +1,6 @@
 #include "traffic_violation.h"
 #include "tests/static_array_test.h"
+#include "tests/dynamic_array_test.h"
 #include <iostream>
 #include <vector>
 #include <algorithm>
@@ -17,11 +18,11 @@ void create_start_vector(std::vector<traffic_violation> &violations){
 int main(int argc, char **argv){
     if(argc>1){
         std::cout<<"run tests\n";
-        std::cout<<"run static array test";
+        std::cout<<"run static array test\n";
         test::test_static_array();
-        std::cout<<"static array: OK\n run dynamic array test";
-        test::test_static_array();
-        std::cout<<"static array: OK\n run dynamic array test";
+        std::cout<<"static array: OK\n run dynamic array test\n\n";
+        test::test_dynamic_array();
+        std::cout<<"dynamic array: OK\n exit\n\n";
         return 0;
     }
     int operations;
