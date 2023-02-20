@@ -3,7 +3,6 @@
 #include "tests/dynamic_array_test.h"
 #include <iostream>
 #include <vector>
-#include <algorithm>
 
 void create_start_vector(std::vector<traffic_violation> &violations){
     int offset = 0;
@@ -30,7 +29,7 @@ int main(int argc, char **argv){
     traffic_violation violation;
     create_start_vector(violations);
     while(true) {
-        std::cout<<"1.From keyvoard\n2.insertion\n3.delete from number\n4.output\n";
+        std::cout<<"1.From keyboard\n2.insertion\n3.delete from number\n4.output\n";
         std::cin >> operations;
         switch (operations) {
             case 1: {

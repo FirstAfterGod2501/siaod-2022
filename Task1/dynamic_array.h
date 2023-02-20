@@ -17,7 +17,7 @@ private:
     int maxsize;
     traffic_violation* ar;
 
-    void shift(traffic_violation *array, int i, int j)
+    static void shift(traffic_violation *array, int i, int j)
     {
         while(i < j)
         {
@@ -69,7 +69,7 @@ public:
     }
 
     ~dynamic_array(){
-        delete(ar);
+        delete[] ar;
     }
 };
 
