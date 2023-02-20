@@ -11,7 +11,7 @@
 
 namespace test {
     void test_dynamic_array() {
-        auto arr = new dynamic_array;
+        auto arr = new dynamic_array<100>;
         traffic_violation violation,violation1;
         violation = arr->read(violation);
         violation1 = arr->read(violation1);

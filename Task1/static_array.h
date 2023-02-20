@@ -1,3 +1,6 @@
+#ifndef SIAOD_STATIC_ARRAY_H
+#define SIAOD_STATIC_ARRAY_H
+
 #include <cassert>
 #include <cstring>
 #include <iostream>
@@ -7,11 +10,25 @@
 
 template<std::size_t Size>
 struct static_array {
-    int size = 0;
 private:
     int maxsize{};
+
     traffic_violation array[Size];
+
+
+    static void shift(traffic_violation *array, int i, int j)
+    {
+        while(i < j)
+        {
+            traffic_violation tmp = array[i];
+            array[i] = array[j];
+            array[j] = tmp;
+            i++;
+            j--;
+        }
+    }
 public:
+    int size = 0;
 
     static_array(){
         this->maxsize=Size;
@@ -26,6 +43,12 @@ public:
         exit(139);
     }
 
+    void erase(const traffic_violation& element){
+        for (int i = 0; i < size; ++i) {
+            shift(array,i,size);
+        }
+    }
+
     void print_array(std::ostream &out) {
         for (int i = 0; i < size; ++i) {
             out << array[i].Get_information_about_violation() << "\n";
@@ -37,12 +60,20 @@ public:
         return violation;
     }
 
-    traffic_violation &operator[](std::int32_t index) const noexcept {
+    void sort(){
+        std::sort(std::begin(array),std::end(array),[](const traffic_violation &left,const traffic_violation &right){
+            return left.car_number>right.car_number;
+        });
+    }
+
+    traffic_violation &operator[](std::int32_t index) noexcept {
         if (index >= 0 && index <= size) {
-            return *(static_array::array + index);
+            return static_cast<traffic_violation &>(*(static_array::array + index));
         }
         else {
             throw std::length_error("Index is out of range.");
         }
     }
 };
+
+#endif //SIAOD_STATIC_ARRAY_H

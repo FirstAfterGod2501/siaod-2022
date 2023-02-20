@@ -1,2 +1,11 @@
 # Project exclude paths
 /cmake-build-debug/
+/CMakeFiles/
+cmake_install.cmake
+default.txt
+Makefile
+siaod
+/.cmake/
+/.idea/
+siaod.cbp
+CMakeCache.txt

@@ -8,4 +8,4 @@ add_executable(siaod
         utils.h
         Task1/traffic_violation.h
         Task1/static_array.h
-        Task1/tests/static_array_test.h Task1/dynamic_array.h Task1/tests/dynamic_array_test.h)
+        Task1/tests/static_array_test.h Task1/dynamic_array.h Task1/tests/dynamic_array_test.h Task1/handler.h)
