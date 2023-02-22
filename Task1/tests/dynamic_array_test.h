@@ -18,6 +18,7 @@ namespace test {
         arr->append(violation);
         arr->append(violation1);
         arr->print_array(std::cout);
+        delete arr;
     }
 }
 
