@@ -6,8 +6,9 @@
 #define SIAOD_HANDLER_H
 
 #include "traffic_violation.h"
-#include "static_array.h"
-#include "dynamic_array.h"
+#include "arrays/static_array.h"
+#include "arrays/dynamic_array.h"
+#include "arrays/vector.h"
 
 namespace handler{
     template<typename Array>
