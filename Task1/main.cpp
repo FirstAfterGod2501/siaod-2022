@@ -1,6 +1,7 @@
 #include "traffic_violation.h"
 #include "tests/static_array_test.h"
 #include "tests/dynamic_array_test.h"
+#include "tests/vector_test.h"
 #include "handler.h"
 #include <iostream>
 #include <vector>
@@ -15,7 +16,7 @@ void create_start_vector(std::vector<traffic_violation> &violations){
     }
 }
 
-void process(){
+[[noreturn]] void process(){
     int operations;
     handler::handler<arrays::vector_wrapper> array_handler;
     traffic_violation violation;
@@ -51,17 +52,22 @@ void process(){
     }
 }
 
+void running_test(){
+    std::cout<<"run tests\n";
+    std::cout<<"run static array test///\n\n";
+    test::test_static_array();
+    std::cout<<"static array: OK\n run dynamic array test....\n\n";
+    test::test_dynamic_array();
+    std::cout<<"dynamic array: OK\n Runnig vector test... \n\n";
+    test::vector_test();
+    std::cout<<"vector: OK\nexit... \n\n";
+    return;
+}
+
 int main(int argc, char **argv){
     if(argc>1){
-        std::cout<<"run tests\n";
-        std::cout<<"run static array test\n";
-        test::test_static_array();
-        std::cout<<"static array: OK\n run dynamic array test\n\n";
-        test::test_dynamic_array();
-        std::cout<<"dynamic array: OK\n exit\n\n";
+        running_test();
         return 0;
     }
     process();
-    return 0;
-
 }

@@ -30,7 +30,6 @@ namespace arrays {
         }
 
     public:
-
         int size = 0;
 
         dynamic_array() {
