@@ -13,59 +13,53 @@
 #include "../traffic_violation.h"
 
 namespace arrays {
-    template<int Size>
     struct dynamic_array {
     private:
-        int maxsize;
-        traffic_violation *array = new traffic_violation[Size];
+        std::size_t capacity {};
+        std::size_t size {};
+        std::size_t index {};
+        traffic_violation *array;
 
-        static void shift(traffic_violation *array, int i, int j) {
+        static void shift(traffic_violation *array, std::size_t i, std::size_t j) {
             while (i < j) {
-                traffic_violation tmp = array[i];
-                array[i] = array[j];
-                array[j] = tmp;
+                std::swap(array[i], array[j]);
                 i++;
                 j--;
             }
         }
 
     public:
-        int size = 0;
-
-        dynamic_array() {
-            this->maxsize = 0;
-            this->array = new traffic_violation[size + 1];
+        dynamic_array(std::size_t size): capacity(size+1), array(new traffic_violation[capacity]), size(size)
+        {
         }
 
         void append(traffic_violation &element) {
-            if (size + 1 >= maxsize) {
-                auto *new_array = new traffic_violation[size + 1];
-                std::memcpy(new_array, array, (size) * sizeof(traffic_violation));
-                delete[] array;
-                new_array[size] = element;
-                array = new_array;
+            if (index == size) {
+                array = static_cast<traffic_violation*>(std::realloc(array, (++capacity) * sizeof(traffic_violation)));
+                array[index] = element;
+                ++index;
                 ++size;
                 return;
             }
-            array[size + 1] = element;
-            ++size;
+            array[index] = element;
+            ++index;
         }
 
         void erase(const traffic_violation &element) {
-            for (int i = 0; i < size; ++i) {
-                shift(array, i, size);
+            for (int i = 0; i < index; ++i) {
+                shift(array, i, index);
             }
         }
 
         void print_array(std::ostream &out) {
-            for (int i = 0; i < size; ++i) {
+            for (std::size_t i = 0; i < index; ++i) {
                 out << array[i].Get_information_about_violation() << "\n\n\n";
             }
         }
 
         void sort() {
-            for (int i = 0; i < size - 1; i++) {
-                for (int j = 0; j < size - i - 1; j++) {
+            for (std::size_t i = 0; i < index - 1; ++i) {
+                for (std::size_t j = 0; j < index - i - 1; ++j) {
                     if (array[j].car_number > array[j + 1].car_number) {
                         std::swap(array[j], array[j + 1]);
                     }
@@ -73,14 +67,13 @@ namespace arrays {
             }
         }
 
-        traffic_violation read(traffic_violation violation) {
+        void read(traffic_violation& violation) {
             violation.Add_traffic_violation();
-            return violation;
         }
 
-        traffic_violation &operator[](std::int32_t index) noexcept {
-            if (index >= 0 && index <= size) {
-                return static_cast<traffic_violation &>(*(dynamic_array::array + index));
+        traffic_violation &operator[](std::size_t idx) noexcept {
+            if (idx < size) {
+                return static_cast<traffic_violation &>(*(dynamic_array::array + idx));
             } else {
                 throw std::length_error("Index is out of range.");
             }

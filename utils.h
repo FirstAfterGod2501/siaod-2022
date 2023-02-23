@@ -92,19 +92,12 @@ public:
     constexpr c_iterator end() const noexcept { return c_iterator(ptr_array + Size); }
 };
 
-    template <typename Type, typename inputHandler, typename cast>
-    void input(Type& input, const inputHandler& handler, const cast& typeCast) {
-        CIN_FLUSH;
-        while (!std::cin.eof()) {
-            std::string tempInput;
-            std::getline(std::cin, tempInput);
-            if (handler(tempInput)) {
-                input = typeCast(tempInput);
-                return;
-            } else {
-                std::cout << "wrong input\n";
-            }
+    void input(std::string& input) {
+        if (std::getline(std::cin >> std::ws, input).eof()) {
+            std::cout << "stdin stream has been dispatched. Exiting..." << std::endl;
+            exit(EXIT_FAILURE);
         }
+        
     }
 
     template<typename Type>

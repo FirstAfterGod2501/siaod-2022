@@ -8,7 +8,7 @@
 
 void create_start_vector(std::vector<traffic_violation> &violations){
     int offset = 0;
-    for(int i =0;i<3;++i){
+    for(int i = 0; i < 3 ;++i){
         traffic_violation violation;
         violation.read_data_from_file("../default.txt",offset);
         violations.push_back(violation);
@@ -56,9 +56,9 @@ void running_test(){
     std::cout<<"run tests\n";
     std::cout<<"run static array test///\n\n";
     test::test_static_array();
-    std::cout<<"static array: OK\n run dynamic array test....\n\n";
+    std::cout<<"static array: OK\nrun dynamic array test....\n\n";
     test::test_dynamic_array();
-    std::cout<<"dynamic array: OK\n Runnig vector test... \n\n";
+    std::cout<<"dynamic array: OK\nRunning vector test... \n\n";
     test::vector_test();
     std::cout<<"vector: OK\nexit... \n\n";
     return;

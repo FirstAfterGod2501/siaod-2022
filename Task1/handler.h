@@ -26,7 +26,7 @@ namespace handler{
         }
 
         void Delete(std::string car_number){
-            for(int i =0; i< array.size; ++i){
+            for(std::size_t i = 0; i < array.size; ++i){
                 if(array[i].car_number == car_number){
                     Delete(array[i]);
                 }
@@ -34,7 +34,7 @@ namespace handler{
         }
 
         void OutputWithPredicate(const std::string& article){
-            for(int i = 0; i< array.size;++i){
+            for(std::size_t i = 0; i < array.size; ++i){
                 if(array[i].article == article){
                     std::cout << array[i].Get_information_about_violation() << "\n";
                 }
@@ -42,7 +42,7 @@ namespace handler{
         }
 
         void Output(){
-            for(int i = 0; i< array.size;++i){
+            for(std::size_t i = 0; i < array.size; ++i){
                 std::cout << array[i].Get_information_about_violation() << "\n";
             }
         }
