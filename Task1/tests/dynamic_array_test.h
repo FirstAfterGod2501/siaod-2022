@@ -11,12 +11,12 @@
 
 namespace test {
     void test_dynamic_array() {
-        auto arr = arrays::dynamic_array(100);
-        traffic_violation violation {}, violation1 {};
-        arr.read(violation);
+        auto arr = arrays::dynamic_array(1);
+        traffic_violation violation1 {}, violation2 {};
         arr.read(violation1);
-        arr.append(violation);
+        arr.read(violation2);
         arr.append(violation1);
+        arr.append(violation2);
         arr.print_array(std::cout);
     }
 }

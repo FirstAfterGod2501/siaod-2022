@@ -27,6 +27,15 @@ namespace arrays {
                 j--;
             }
         }
+        
+        static traffic_violation* reallocate_array(traffic_violation* src, std::size_t size_prev, std::size_t size_new) {
+            //assert(size_new>size_prev);
+            //SAFETY: size_new is always greater than size_prev
+            auto* dest = new traffic_violation[size_new];
+            std::copy(src, src+size_prev, dest);
+            delete[] src;
+            return dest;
+        }
 
     public:
         dynamic_array(std::size_t size): capacity(size+1), array(new traffic_violation[capacity]), size(size)
@@ -35,7 +44,8 @@ namespace arrays {
 
         void append(traffic_violation &element) {
             if (index == size) {
-                array = static_cast<traffic_violation*>(std::realloc(array, (++capacity) * sizeof(traffic_violation)));
+                std::size_t prev_size = capacity;
+                array = reallocate_array(array, prev_size, ++capacity);
                 array[index] = element;
                 ++index;
                 ++size;
