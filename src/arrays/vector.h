@@ -20,6 +20,7 @@ namespace arrays{
 
         void append(const traffic_violation &element) {
             array.push_back(element);
+            ++size;
         }
 
         void erase(const traffic_violation &element) {
@@ -34,13 +35,13 @@ namespace arrays{
             });
         }
 
-        traffic_violation read(traffic_violation violation) {
+        static traffic_violation read(traffic_violation violation) {
             violation.Add_traffic_violation();
             return violation;
         }
 
         void sort() {
-            std::sort(array.begin(),array.end(),[&](traffic_violation left, traffic_violation right){
+            std::sort(array.begin(),array.end(),[&](const traffic_violation& left, const traffic_violation& right){
                 return left.car_number < right.car_number;
             });
         }

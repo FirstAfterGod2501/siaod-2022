@@ -11,7 +11,22 @@
 #include "../utils.h"
 
 struct traffic_violation{
-    void get_value(std::string &value){
+
+    std::string car_number {};
+
+    std::string full_name {};
+
+    std::string model {};
+
+    time_t date_of_violation {};
+
+    std::string place_of_violation {};
+
+    std::string article {};
+
+    int punishment {};
+
+    static void get_value(std::string &value){
         utils::input(value);
     }
 
@@ -66,20 +81,6 @@ struct traffic_violation{
                +"\npunishment: " + std::to_string(punishment);
 
     }
-
-    std::string car_number {};
-
-    std::string full_name {};
-
-    std::string model {};
-
-    time_t date_of_violation {};
-
-    std::string place_of_violation {};
-
-    std::string article {};
-
-    int punishment {};
 };
 
 #endif //SIAOD_TRAFFIC_VIOLATION_H

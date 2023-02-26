@@ -4,14 +4,13 @@
 #include "tests/vector_test.h"
 #include "handler.h"
 #include <iostream>
-#include <vector>
 
-void create_start_vector(std::vector<traffic_violation> &violations){
+void create_start_vector(handler::handler<arrays::vector_wrapper> &violations){
     int offset = 0;
     for(int i = 0; i < 3 ;++i){
         traffic_violation violation;
         violation.read_data_from_file("../default.txt",offset);
-        violations.push_back(violation);
+        violations.Insertion(violation);
         offset+=7;
     }
 }
@@ -20,6 +19,7 @@ void create_start_vector(std::vector<traffic_violation> &violations){
     int operations;
     handler::handler<arrays::vector_wrapper> array_handler;
     traffic_violation violation;
+    create_start_vector(array_handler);
     while(true){
         std::cout<<"1.From keyboard\n2.insertion\n3.delete from number\n4.output\n";
         std::cin>>operations;
@@ -54,14 +54,13 @@ void create_start_vector(std::vector<traffic_violation> &violations){
 
 void running_test(){
     std::cout<<"run tests\n";
-    std::cout<<"run static array test///\n\n";
+    std::cout<<"run static array test\n\n";
     test::test_static_array();
     std::cout<<"static array: OK\nrun dynamic array test....\n\n";
     test::test_dynamic_array();
     std::cout<<"dynamic array: OK\nRunning vector test... \n\n";
     test::vector_test();
     std::cout<<"vector: OK\nexit... \n\n";
-    return;
 }
 
 int main(int argc, char **argv){

@@ -16,8 +16,11 @@ namespace arrays {
     struct dynamic_array {
     private:
         std::size_t capacity {};
+
         std::size_t size {};
+
         std::size_t index {};
+
         traffic_violation *array;
 
         static void shift(traffic_violation *array, std::size_t i, std::size_t j) {
@@ -29,8 +32,6 @@ namespace arrays {
         }
         
         static traffic_violation* reallocate_array(traffic_violation* src, std::size_t size_prev, std::size_t size_new) {
-            //assert(size_new>size_prev);
-            //SAFETY: size_new is always greater than size_prev
             auto* dest = new traffic_violation[size_new];
             std::copy(src, src+size_prev, dest);
             delete[] src;
@@ -38,7 +39,7 @@ namespace arrays {
         }
 
     public:
-        dynamic_array(std::size_t size): capacity(size+1), array(new traffic_violation[capacity]), size(size)
+        explicit dynamic_array(std::size_t size): capacity(size+1), array(new traffic_violation[capacity]), size(size)
         {
         }
 
@@ -63,7 +64,9 @@ namespace arrays {
 
         void print_array(std::ostream &out) {
             for (std::size_t i = 0; i < index; ++i) {
-                out << array[i].Get_information_about_violation() << "\n\n\n";
+                if (!array[i].car_number.empty()) {
+                    out << array[i].Get_information_about_violation() << "\n\n\n";
+                }
             }
         }
 
@@ -77,7 +80,7 @@ namespace arrays {
             }
         }
 
-        void read(traffic_violation& violation) {
+        static void read(traffic_violation& violation) {
             violation.Add_traffic_violation();
         }
 

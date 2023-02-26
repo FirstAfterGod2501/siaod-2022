@@ -7,6 +7,7 @@
 #include <utility>
 #include <algorithm>
 #include "../traffic_violation.h"
+
 namespace arrays {
     template<std::size_t Size>
     struct static_array {
@@ -50,7 +51,9 @@ namespace arrays {
 
         void print_array(std::ostream &out) {
             for (int i = 0; i < size; ++i) {
-                out << array[i].Get_information_about_violation() << "\n";
+                if (!array[i].car_number.empty()) {
+                    out << array[i].Get_information_about_violation() << "\n";
+                }
             }
         }
 

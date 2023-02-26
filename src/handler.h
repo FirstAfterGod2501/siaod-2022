@@ -25,7 +25,7 @@ namespace handler{
             array.erase(violation);
         }
 
-        void Delete(std::string car_number){
+        void Delete(const std::string& car_number){
             for(std::size_t i = 0; i < array.size; ++i){
                 if(array[i].car_number == car_number){
                     Delete(array[i]);

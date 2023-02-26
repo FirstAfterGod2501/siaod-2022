@@ -13,11 +13,14 @@ namespace test {
     void vector_test() {
         arrays::vector_wrapper arr;
         traffic_violation violation,violation1;
-        violation = arr.read(violation);
-        violation1 = arr.read(violation1);
+        violation = arrays::vector_wrapper::read(violation);
+        violation1 = arrays::vector_wrapper::read(violation1);
         arr.append(violation);
         arr.append(violation1);
         arr.print_array(std::cout);
+        arr.erase(violation1);
+        arr.print_array(std::cout);
+
     }
 }
 
