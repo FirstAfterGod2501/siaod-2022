@@ -7,8 +7,8 @@
 
 namespace test {
     void test_static_array() {
-        arrays::static_array<100> arr;
-        traffic_violation violation,violation1;
+        arrays::static_array<100> arr {};
+        traffic_violation violation {}, violation1 {};
         violation = arr.read(violation);
         violation1 = arr.read(violation1);
         arr.append(violation);

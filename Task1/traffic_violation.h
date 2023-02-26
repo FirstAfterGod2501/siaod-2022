@@ -11,10 +11,8 @@
 #include "../utils.h"
 
 struct traffic_violation{
-    template<class Type>
-    void get_value(Type &value){
-        utils::input(value,[](const std::string& input){return true;},
-                     [](const std::string& input){return input;});
+    void get_value(std::string &value){
+        utils::input(value);
     }
 
     void read_data_from_file(const std::string& path,int offset){
@@ -36,26 +34,26 @@ struct traffic_violation{
         car_number = temp_values[counter++];
         full_name = temp_values[counter++];
         model = temp_values[counter++];
-        date_of_violation = (time_t)atoi(temp_values[counter++].c_str());
+        date_of_violation = (time_t)std::atoi(temp_values[counter++].c_str());
         place_of_violation = temp_values[counter++];
         article = temp_values[counter++];
         punishment = std::stoi(temp_values[counter++]);
     }
 
     void Add_traffic_violation() {
-        std::cout << "Enter car number\n";
+        std::cout << "Enter car number" << std::endl;
         std::cin >> car_number;
-        std::cout << "Enter full name\n";
+        std::cout << "Enter full name" << std::endl;
         get_value(full_name);
-        std::cout << "Enter model of car\n";
+        std::cout << "Enter model of car" << std::endl;
         get_value(model);
-        std::cout << "Enter date of violation\n";
+        std::cout << "Enter date of violation" << std::endl;
         std::cin >> date_of_violation;
-        std::cout << "Enter place of violation\n";
+        std::cout << "Enter place of violation" << std::endl;
         get_value(place_of_violation);
-        std::cout << "Enter article\n";
+        std::cout << "Enter article" << std::endl;
         get_value(article);
-        std::cout << "Enter punishment\n";
+        std::cout << "Enter punishment" << std::endl;
         std::cin >> punishment;
    }
 
@@ -69,20 +67,19 @@ struct traffic_violation{
 
     }
 
-    std::string car_number;
+    std::string car_number {};
 
-    std::string full_name;
+    std::string full_name {};
 
-    std::string model;
+    std::string model {};
 
-    time_t date_of_violation;
+    time_t date_of_violation {};
 
-    std::string place_of_violation;
+    std::string place_of_violation {};
 
-    std::string article;
+    std::string article {};
 
-    int punishment;
-
+    int punishment {};
 };
 
 #endif //SIAOD_TRAFFIC_VIOLATION_H
