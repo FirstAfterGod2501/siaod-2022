@@ -1,5 +1,5 @@
 //
-// Created by first on 14.02.23.
+// Created by Mitron57 on 10.10.22.
 //
 
 #ifndef SIAOD_UTILS_H
@@ -55,7 +55,7 @@ public:
     }
 
     Type &operator[](std::int32_t index) const noexcept {
-        if (index >= 0 && index <= Size) {
+        if (index >= 0 && index < Size) {
             return *(Array::ptr_array + index);
         } else if (std::abs(index) <= Size) {
             return *(Array::ptr_array + (Size + index));
