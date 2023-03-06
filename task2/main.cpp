@@ -1,117 +1,73 @@
-//3
-class list;
-
-/*
- * Даны два линейных однонаправленных
-списка L1 и L2.
-1) Разработать функцию, которая формирует
-список L, включив в него по одному разу
-элементы, значения которых входят в список L1
-и не входят в список L2.
-2) Разработать функцию, которая удаляет
-подсписок списка
-L1 заданный диапазоном
-позиций. Например, со второго три.
-3) Разработать функцию, которая
-упорядочивает значения списка
-L2, располагая
-их в порядке возрастания.
- */
-
-#include <iostream>
-#include <list>
-#include <algorithm>
-
-struct modified_list{
-
-    int size = 0;
-
-    std::list<char> listptr;
-
-    modified_list(){
-        listptr = *new std::list<char>;
-    }
-
-    void sort(){
-        listptr.sort();
-    }
-
-    void append(char a){
-        listptr.push_back(a);
-        ++size;
-    }
-
-    template<typename Predicate>
-    void erase(std::list<char>::iterator begin,std::list<char>::iterator end, Predicate predicate){
-        for (auto it = begin; it != end;) {
-            if (predicate(*it)) {
-                it = listptr.erase(it);
-            } else {
-                ++it;
-            }
-        }
-    }
-
-    static bool find(std::list<char>::iterator begin,std::list<char>::iterator end,char c){
-        for(auto  it = begin; it!= end;) {
-            if (c == *it) {
-                return true;
-            } else {
-                it++;
-            }
-        }
-        return false;
-    }
-
-    void print(){
-        for (char i : listptr) {
-            std::cout << i << " ";
-        }
-        std::cout << '\n';
-
-    }
-
-    char operator[](int idx)  {
-        int counter = 0;
-        for (char element : listptr) {
-            if(counter == idx){
-                return element;
-            }
-            ++counter;
-        }
-        return 0;
-    }
-};
+#include "modified_list.h"
+#include <gtest/gtest.h>
+#include <gmock/gmock.h>
+#include <fstream>
+#include "tests/tests.h"
 
 modified_list format_L(modified_list L1, modified_list L2){
     modified_list L;
     for (int i = 0; i < L1.size; ++i) {
         auto value = L1[i];
-        if(!modified_list::find(L1.listptr.begin(),L1.listptr.end(),value)){
-            if(!modified_list::find(L2.listptr.begin(),L2.listptr.end(),value)) {
-                L.append(value);
+        if(!modified_list::find(L1.listptr->begin(),L1.listptr->end(),value)){
+            if(!modified_list::find(L2.listptr->begin(),L2.listptr->end(),value)) {
+                L.push_back(value);
             }
         }
     }
     return L;
 }
 
-int main(){
+void Read_from_file(modified_list &list){
+        std::string line;
+        std::ifstream in("../default.txt");
+        if (in.is_open())
+        {
+            while (getline(in, line)) {
+                list.push_back(line[0]);
+            }
+        }
+        in.close();
+}
+
+
+[[noreturn]] void task(){
     modified_list list;
-    list.append('1');
-    list.append('2');
-    list.append('3');
-    list.append('4');
-    list.append('5');
-    list.append('6');
-    list.append('7');
-    list.append('8');
-    list.append('9');
-    for (int i = 0; i < list.size; ++i) {
-        std::cout<<list[i]<<" ";
+    Read_from_file(list);
+    int opt{};
+    modified_list list1{},list2{};
+    for (int i = 0; i < 9; ++i) {
+        list1.push_back(list[i]);
+        list2.push_back(list[i+9]);
     }
-    list.erase(list.listptr.begin(),list.listptr.end(),[](char element){
-        return element == '4';
-    });
-    list.print();
+    for(;std::cin>>opt;){
+        switch (opt) {
+            case 1:
+                list1.print();
+                list2.print();
+                break;
+            case 2:
+                int start,end;
+                std::cin >> start >> end;
+                list1.erase(start,end);
+                list1.print();
+                break;
+            case 3:
+                list2.sort();
+                break;
+            default:
+                list1.print();
+                list2.print();
+                break;
+        }
+    }
+}
+
+int main(){
+    ::testing::InitGoogleTest();
+    ::testing::InitGoogleMock();
+    if(RUN_ALL_TESTS()){
+        return 1;
+    }
+    task();
+    return 0;
 }
