@@ -60,7 +60,7 @@ struct infix_to_postfix {
             postfix += s.top();
             s.pop();
         }
-        std::cout << "Postfix is : " << postfix; //it will print postfix conversion
+        std::cout << "Postfix is : " << postfix;
         return postfix;
     }
 };
