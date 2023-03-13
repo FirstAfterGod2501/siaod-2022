@@ -1,5 +1,5 @@
 //
-// Created by Mitron57 on 10.10.22.
+// Created by сын собаки on 10.10.22.
 //
 
 #ifndef SIAOD_UTILS_H
